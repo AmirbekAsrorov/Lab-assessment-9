@@ -1,0 +1,79 @@
+void Problem19()
+{
+    cout << "Problem 19" << endl;
+    int x = 0;
+    int n;
+    cin >> n;
+    string operation;
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> operation;
+        if (operation == "++x" || operation == "x++")
+            ++x;
+        else if (operation == "--x" || operation == "x--")
+            --x;
+    }
+    cout << x << endl;
+}
+
+int romanToInt(const std::string &s)
+{
+    unordered_map<char, int> romanMap = {
+        {'I', 1},
+        {'V', 5},
+        {'X', 10},
+        {'L', 50},
+        {'C', 100},
+        {'D', 500},
+        {'M', 1000}};
+
+    int intValue = 0;
+    for (size_t i = 0; i < s.length(); i++)
+        if (i + 1 < s.length() && romanMap[s[i]] < romanMap[s[i + 1]])
+            intValue -= romanMap[s[i]];
+        else
+            intValue += romanMap[s[i]];
+
+    return intValue;
+}
+
+void Problem20()
+{
+    cout << "Problem 20" << endl;
+    string num;
+    cin >> num;
+    cout << romanToInt(num) << endl;
+}
+
+string convertWord(std::string s)
+{
+    int lowerCaseCount = 0;
+    int upperCaseCount = 0;
+
+    for (char ch : s)
+        if (std::islower(ch))
+            lowerCaseCount++;
+        else
+            upperCaseCount++;
+
+    if (lowerCaseCount < upperCaseCount)
+        transform(s.begin(), s.end(), s.begin(), toupper);
+    else
+        transform(s.begin(), s.end(), s.begin(), tolower);
+
+    return s;
+}
+
+void Problem21()
+{
+    cout << "Problem 21" << endl;
+    string inputWord;
+    cin >> inputWord;
+    cout << convertWord(inputWord) << endl;
+}
+int main() {
+Problem 19 () ;
+Problem 20 () ;
+Problem 21 () ;
+return 0;
+}
