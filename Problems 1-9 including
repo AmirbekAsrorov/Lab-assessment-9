@@ -37,6 +37,10 @@ double sumMajorDiagonal(const double m[SIZE][SIZE])
     }
     return sum;
 }
+int main() { 
+Problem1();
+return 0;
+}
 
 void Problem2()
 {
@@ -59,7 +63,10 @@ void multiplyMatrix(const double a[SIZE][SIZE], const double b[SIZE][SIZE], doub
         }
     }
 }
-
+int main() { 
+Problem2();
+return 0;
+}
 void Problem3()
 {
     cout << "Problem 3" << endl;
@@ -89,7 +96,10 @@ void search(string &s, char &key)
     }
     cout << "Not found" << endl;
 }
-
+int main(){
+Problem3();
+return 0;
+}
 void Problem4()
 {
     cout << "Problem 4" << endl;
@@ -110,7 +120,10 @@ int count(const string &s, char a)
     }
     return c;
 }
-
+int main() {
+Problem4();
+return 0
+}
 void Problem5()
 {
     cout << "Problem 5" << endl;
@@ -128,7 +141,10 @@ void count(const string s, int counts[])
             counts[a - 'a']++;
     }
 }
-
+int main(){
+Problem5();
+return 0;
+}
 void Problem6()
 {
     cout << "Problem 6" << endl;
@@ -141,7 +157,10 @@ void Problem6()
         if (counts[i])
             cout << (char)(i + 'a') << ": " << counts[i] << endl;
 }
-
+int main(){
+Problem6();
+return 0;
+}
 void Problem7()
 {
     cout << "Problem 7" << endl;
@@ -168,7 +187,10 @@ void Problem7()
     cout << "Maximum=" << max << endl;
     cout << "Average=" << double(sum) / (double)n << endl;
 }
-
+int main(){
+Problem7();
+return 0;
+}
 void Problem8()
 {
     cout << "Problem 8" << endl;
@@ -199,7 +221,10 @@ void Problem8()
         if (*i > 0)
             cout << *i << ' ';
 }
-
+int main(){
+Problem8();
+return 0;
+}
 void Problem9()
 {
     cout << "Problem 9" << endl;
@@ -210,4 +235,8 @@ void Problem9()
         if (find(arr.begin(), arr.end(), s[i]) == arr.end())
             arr.push_back(s[i]);
     cout << arr.size() << endl;
+}
+int main(){
+Problem9();
+return 0;
 }
