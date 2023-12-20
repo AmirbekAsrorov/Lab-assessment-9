@@ -1,0 +1,213 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+const int SIZE = 4;
+double sumColumn(const double m[][SIZE], int rowSize, int columnIndex)
+{
+    double sum = 0;
+    for (int i = 0; i < rowSize; i++)
+    {
+        sum += m[i][columnIndex];
+    }
+    return sum;
+}
+
+void Problem1()
+{
+    cout << "Problem 1" << endl;
+    const int rows = 5;
+    double m[rows][SIZE] = {5, 3, 1, 6,
+                            -5, 2, 1, 5, 6, 6, 1, 6, -3, 11, 2, 55, 0, 4, 0, 4};
+    for (int i = 0; i < SIZE; i++)
+    {
+        cout << "sum of column " << i << '=' << sumColumn(m, rows, i) << endl;
+    }
+}
+
+double sumMajorDiagonal(const double m[SIZE][SIZE])
+{
+    double sum = 0;
+    for (int i = 0; i < SIZE; i++)
+    {
+        sum += m[i][i];
+    }
+    return sum;
+}
+
+void Problem2()
+{
+    cout << "Problem 2" << endl;
+    double m[SIZE][SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    cout << sumMajorDiagonal(m) << endl;
+}
+
+void multiplyMatrix(const double a[SIZE][SIZE], const double b[SIZE][SIZE], double c[SIZE][SIZE])
+{
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            c[i][j] = 0;
+            for (int n = 0; n < SIZE; n++)
+            {
+                c[i][j] += a[i][n] * b[n][j];
+            }
+        }
+    }
+}
+
+void Problem3()
+{
+    cout << "Problem 3" << endl;
+    double m1[SIZE][SIZE] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
+    double m2[SIZE][SIZE] = {0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5};
+    double c[SIZE][SIZE];
+    multiplyMatrix(m1, m2, c);
+    for (int i = 0; i < SIZE; i++)
+    {
+        for (int j = 0; j < SIZE; j++)
+        {
+            cout << c[i][j] << ' ';
+        }
+        cout << endl;
+    }
+}
+
+void search(string &s, char &key)
+{
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == key)
+        {
+            cout << "Found" << endl;
+            return;
+        }
+    }
+    cout << "Not found" << endl;
+}
+
+void Problem4()
+{
+    cout << "Problem 4" << endl;
+    string s = "Is it true?";
+    char key = '#';
+    search(s, key);
+}
+
+int count(const string &s, char a)
+{
+    int c = 0;
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == a)
+        {
+            c++;
+        }
+    }
+    return c;
+}
+
+void Problem5()
+{
+    cout << "Problem 5" << endl;
+    string s = "The True story";
+    char a = 'T';
+    cout << count(s, a) << endl;
+}
+
+void count(const string s, int counts[])
+{
+    for (int i = 0; i < s.length(); i++)
+    {
+        char a = tolower(s[i]);
+        if ('a' <= a && a <= 'z')
+            counts[a - 'a']++;
+    }
+}
+
+void Problem6()
+{
+    cout << "Problem 6" << endl;
+    string s = "Hello World! How are you?";
+    int counts[25];
+    for (int i = 0; i < 25; i++)
+        counts[i] = 0;
+    count(s, counts);
+    for (int i = 0; i < 25; i++)
+        if (counts[i])
+            cout << (char)(i + 'a') << ": " << counts[i] << endl;
+}
+
+void Problem7()
+{
+    cout << "Problem 7" << endl;
+    int n, j;
+    cin >> n;
+    vector<int> arr;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> j;
+        arr.push_back(j);
+    }
+    int min = arr[0];
+    int max = 0;
+    int sum = 0;
+    for (auto i = arr.begin(); i != arr.end(); ++i)
+    {
+        if (*i < min)
+            min = *i;
+        if (*i > max)
+            max = *i;
+        sum += *i;
+    }
+    cout << "Minimum=" << min << endl;
+    cout << "Maximum=" << max << endl;
+    cout << "Average=" << double(sum) / (double)n << endl;
+}
+
+void Problem8()
+{
+    cout << "Problem 8" << endl;
+    int n, j;
+    cin >> n;
+    vector<int> arr;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> j;
+        arr.push_back(j);
+    }
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        bool swapped = false;
+        for (int j = 0; j < n - i - 1; j++)
+            if (arr[j] > arr[j + 1])
+            {
+                swap(arr[j], arr[j + 1]);
+                swapped = true;
+            }
+
+        if (!swapped)
+            break;
+    }
+
+    for (auto i = arr.begin(); i != arr.end(); ++i)
+        if (*i > 0)
+            cout << *i << ' ';
+}
+
+void Problem9()
+{
+    cout << "Problem 9" << endl;
+    string s;
+    cin >> s;
+    vector<int> arr;
+    for (int i = 0; i < s.length(); i++)
+        if (find(arr.begin(), arr.end(), s[i]) == arr.end())
+            arr.push_back(s[i]);
+    cout << arr.size() << endl;
+}
