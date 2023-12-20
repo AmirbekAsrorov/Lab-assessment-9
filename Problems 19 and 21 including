@@ -37,32 +37,6 @@ int romanToInt(const std::string &s)
     return intValue;
 }
 
-void Problem20()
-{
-    cout << "Problem 20" << endl;
-    string num;
-    cin >> num;
-    cout << romanToInt(num) << endl;
-}
-
-string convertWord(std::string s)
-{
-    int lowerCaseCount = 0;
-    int upperCaseCount = 0;
-
-    for (char ch : s)
-        if (std::islower(ch))
-            lowerCaseCount++;
-        else
-            upperCaseCount++;
-
-    if (lowerCaseCount < upperCaseCount)
-        transform(s.begin(), s.end(), s.begin(), toupper);
-    else
-        transform(s.begin(), s.end(), s.begin(), tolower);
-
-    return s;
-}
 
 void Problem21()
 {
@@ -73,7 +47,6 @@ void Problem21()
 }
 int main() {
 Problem 19 () ;
-Problem 20 () ;
 Problem 21 () ;
 return 0;
 }
