@@ -1,0 +1,311 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+void Problem10()
+{
+    cout << "Problem 10" << endl;
+    int n, j;
+    cin >> n;
+    vector<int> arr;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> j;
+        arr.push_back(j);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        bool less = true;
+        if ((i == 0) || (arr[i - 1] <= arr[i]))
+            less = false;
+        if ((i + 1 == n) || (arr[i + 1] <= arr[i]))
+            less = false;
+        if (less)
+            cout << arr[i] << ' ';
+    }
+}
+
+#define val 33.3;
+#define number 50;
+
+int a;
+int &fun()
+{
+    return a;
+}
+int foo()
+{
+    return a;
+}
+void Problem11()
+{
+    cout << "Problem 11" << endl;
+    int n1 = 9, n2 = 11, *ptr_1 = nullptr, *ptr_2 = nullptr, k = 0;
+    double t;
+
+    ptr_1 = &n1;
+    ptr_2 = &n2;
+    t = val;
+    k = val;
+    fun() = number;
+
+    cout << fun() << " " << ++*ptr_2 << " " << --t << " " << --*ptr_1 << endl;
+}
+
+void Problem12()
+{
+    cout << "Problem 12" << endl;
+    int a[10] = {432, 5634, 63, 43, 243, 5, 4, 654, 5437, 5534};
+    int *ptrA = nullptr;
+    for (int i = 0; i < 10; i++)
+    {
+        ptrA = &a[i];
+        cout << ptrA << ' ' << *ptrA << endl;
+    }
+}
+
+int findLargestElement(const int *arr, int size)
+{
+    const int *p = arr;
+    int largest = *p;
+    for (int i = 1; i < size; ++i)
+        if (*(p + i) > largest)
+            largest = *(p + i);
+
+    return largest;
+}
+
+void Problem13()
+{
+    cout << "Problem 13" << endl;
+    int arr[] = {8, 5, 9, -9, 66, 7};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    cout << findLargestElement(arr, size) << endl;
+}
+
+int *countDigits(const int &num)
+{
+    static int counts[10] = {};
+    int n = abs(num);
+    if (!n)
+        counts[0]++;
+    while (n)
+    {
+        counts[n % 10]++;
+        n /= 10;
+    }
+    return counts;
+}
+
+void Problem14()
+{
+    cout << "Problem 14" << endl;
+    int n;
+    cin >> n;
+    int *digitCounts = countDigits(n);
+    for (int i = 0; i < 10; ++i)
+    {
+        cout << "counts[" << i << "]=" << digitCounts[i] << endl;
+    }
+}
+
+int cstrLength(char *c)
+{
+    char *ptr = c;
+    int length = 0;
+
+    while (*ptr != '\0')
+    {
+        ++length;
+        ++ptr;
+    }
+
+    return length;
+}
+
+void Problem15()
+{
+    cout << "Problem 15" << endl;
+    char s[] = "The show must go on";
+    cout << cstrLength(s) << endl;
+}
+
+void factorial(int n, int *fact)
+{
+    if (n < 0)
+    {
+        *fact = 0;
+        return;
+    }
+    *fact = 1;
+    for (int i = 2; i <= n; ++i)
+        *fact *= i;
+}
+
+void Problem16()
+{
+    cout << "Problem 16" << endl;
+    int n;
+    cin >> n;
+    int result;
+    factorial(n, &result);
+    cout << result << endl;
+}
+
+char to_lower(const char c)
+{
+    return tolower(static_cast<unsigned char>(c));
+}
+
+void countChar(const char *str, int &vowelCount, int &consonantCount)
+{
+    vowelCount = 0;
+    consonantCount = 0;
+    const char *p = str;
+
+    while (*p)
+    {
+        char c = to_lower(*p);
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+            ++vowelCount;
+        else if ((c >= 'a' && c <= 'z'))
+            ++consonantCount;
+        ++p;
+    }
+}
+
+void Problem17()
+{
+    cout << "Problem 17" << endl;
+    const char *str = "Happy New Year";
+    int vowels = 0;
+    int consonants = 0;
+    countChar(str, vowels, consonants);
+    cout << "vowels: " << vowels << endl;
+    cout << "consonants: " << consonants << endl;
+}
+
+void sortArray(int *arr, int size)
+{
+    for (int i = 0; i < size - 1; i++)
+        for (int *p = arr; p < arr + size - 1 - i; p++)
+            if (*p > *(p + 1))
+            {
+                int temp = *p;
+                *p = *(p + 1);
+                *(p + 1) = temp;
+            }
+}
+
+void Problem18()
+{
+    cout << "Problem 18" << endl;
+    int data[] = {4, 3, -3, 1, 3, 4};
+    int size = sizeof(data) / sizeof(data[0]);
+    sortArray(data, size);
+    for (int *p = data; p < data + size; ++p)
+        cout << *p << ' ';
+    cout << endl;
+}
+
+void Problem19()
+{
+    cout << "Problem 19" << endl;
+    int x = 0;
+    int n;
+    cin >> n;
+    string operation;
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> operation;
+        if (operation == "++x" || operation == "x++")
+            ++x;
+        else if (operation == "--x" || operation == "x--")
+            --x;
+    }
+    cout << x << endl;
+}
+
+int romanToInt(const std::string &s)
+{
+    unordered_map<char, int> romanMap = {
+        {'I', 1},
+        {'V', 5},
+        {'X', 10},
+        {'L', 50},
+        {'C', 100},
+        {'D', 500},
+        {'M', 1000}};
+
+    int intValue = 0;
+    for (size_t i = 0; i < s.length(); i++)
+        if (i + 1 < s.length() && romanMap[s[i]] < romanMap[s[i + 1]])
+            intValue -= romanMap[s[i]];
+        else
+            intValue += romanMap[s[i]];
+
+    return intValue;
+}
+
+void Problem20()
+{
+    cout << "Problem 20" << endl;
+    string num;
+    cin >> num;
+    cout << romanToInt(num) << endl;
+}
+
+string convertWord(std::string s)
+{
+    int lowerCaseCount = 0;
+    int upperCaseCount = 0;
+
+    for (char ch : s)
+        if (std::islower(ch))
+            lowerCaseCount++;
+        else
+            upperCaseCount++;
+
+    if (lowerCaseCount < upperCaseCount)
+        transform(s.begin(), s.end(), s.begin(), toupper);
+    else
+        transform(s.begin(), s.end(), s.begin(), tolower);
+
+    return s;
+}
+
+void Problem21()
+{
+    cout << "Problem 21" << endl;
+    string inputWord;
+    cin >> inputWord;
+    cout << convertWord(inputWord) << endl;
+}
+
+int main()
+{
+    Problem10();
+    Problem11();
+    Problem12();
+    Problem13();
+    Problem14();
+    Problem15();
+    Problem16();
+    Problem17();
+    Problem18();
+    Problem19();
+    Problem20();
+    Problem21();
+    return 0;
+}
+
+
+
+
+
+
+
+
